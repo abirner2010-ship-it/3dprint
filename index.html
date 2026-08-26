@@ -1,8 +1,6 @@
-
-
-  ```html
 <!DOCTYPE html>
 <html lang="cs">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +8,7 @@
     <title>3D PRINT | 3D tisk na zakázku</title>
 
     <style>
+
         * {
             margin: 0;
             padding: 0;
@@ -25,6 +24,7 @@
             background: #f5f5f5;
             color: #111;
         }
+
 
         /* =========================
            NAVIGACE
@@ -82,6 +82,7 @@
         .nav-links a:hover {
             color: #ff6b00;
         }
+
 
         /* =========================
            ÚVOD
@@ -146,6 +147,7 @@
             line-height: 1.6;
         }
 
+
         /* =========================
            TLAČÍTKA
         ========================== */
@@ -194,6 +196,7 @@
             transform: translateY(-2px);
         }
 
+
         /* =========================
            SEKCE
         ========================== */
@@ -223,6 +226,7 @@
             font-size: 45px;
         }
 
+
         /* =========================
            KARTY SLUŽEB
         ========================== */
@@ -247,6 +251,8 @@
                 0 10px 30px rgba(0, 0, 0, 0.06);
 
             transition: 0.2s;
+
+            min-width: 0;
         }
 
         .card:hover {
@@ -274,45 +280,75 @@
             line-height: 1.6;
         }
 
+
         /* =========================
            BARVY FILAMENTU
         ========================== */
 
-        .colors-list {
-            margin-top: 20px;
-
-            color: #444;
-
-            line-height: 1.9;
+        .filament-section {
+            margin-top: 25px;
         }
 
-        .colors-title {
+        .filament-title {
+            font-size: 13px;
+
             font-weight: bold;
 
-            color: #111;
+            color: #ff6b00;
 
-            margin-bottom: 5px;
+            text-transform: uppercase;
+
+            letter-spacing: 1.5px;
+
+            margin-bottom: 10px;
         }
 
-        .color-item {
+        .color-list {
             display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 8px;
+
+            max-width: 100%;
+        }
+
+        .color-tag {
+            display: inline-flex;
 
             align-items: center;
 
-            gap: 8px;
+            gap: 7px;
+
+            padding: 8px 11px;
+
+            background: #f5f5f5;
+
+            border: 1px solid #e5e5e5;
+
+            border-radius: 20px;
+
+            font-size: 13px;
+
+            color: #333;
+
+            white-space: nowrap;
+
+            max-width: 100%;
         }
 
         .color-dot {
-            width: 14px;
-            height: 14px;
+            width: 12px;
+
+            height: 12px;
+
+            min-width: 12px;
 
             border-radius: 50%;
 
             display: inline-block;
 
-            border: 1px solid #bbb;
-
-            flex-shrink: 0;
+            border: 1px solid #ccc;
         }
 
         .matte-black {
@@ -320,24 +356,25 @@
         }
 
         .black {
-            background: #000;
+            background: #050505;
         }
 
         .white {
             background: #fff;
         }
 
-        .gray {
+        .grey {
             background: #888;
         }
 
         .green {
-            background: #168a35;
+            background: #27a844;
         }
 
         .orange {
             background: #ff6b00;
         }
+
 
         /* =========================
            CENÍK
@@ -395,6 +432,7 @@
             line-height: 1.6;
         }
 
+
         /* =========================
            KONTAKT
         ========================== */
@@ -450,6 +488,7 @@
             transform: translateY(-2px);
         }
 
+
         /* INSTAGRAM */
 
         .instagram {
@@ -459,6 +498,7 @@
         .instagram:hover {
             background: #222;
         }
+
 
         /* E-MAIL */
 
@@ -470,6 +510,7 @@
             background: #ff8126;
         }
 
+
         /* TELEFON */
 
         .phone {
@@ -479,6 +520,7 @@
         .phone:hover {
             background: #444;
         }
+
 
         /* POZNÁMKA */
 
@@ -497,6 +539,7 @@
 
             font-size: 14px;
         }
+
 
         /* =========================
            PATIČKA
@@ -523,6 +566,7 @@
 
             color: #666;
         }
+
 
         /* =========================
            MOBIL
@@ -574,17 +618,22 @@
             .price-row {
                 padding: 20px;
             }
+
         }
+
     </style>
 </head>
 
+
 <body>
+
 
     <!-- =========================
          NAVIGACE
     ========================== -->
 
     <header>
+
         <nav class="navbar">
 
             <a href="#home" class="logo">
@@ -594,17 +643,22 @@
             <div class="nav-links">
 
                 <a href="#home">Domů</a>
+
                 <a href="#sluzby">Služby</a>
+
                 <a href="#cenik">Ceník</a>
+
                 <a href="#kontakt">Kontakt</a>
 
             </div>
 
         </nav>
+
     </header>
 
 
     <main>
+
 
         <!-- =========================
              ÚVOD
@@ -624,10 +678,14 @@
                 </h1>
 
                 <p class="hero-text">
+
                     Potřebuješ vytisknout držák,
                     dekoraci, součástku nebo vlastní model?
+
                     <br>
+
                     Napiš mi a domluvíme se.
+
                 </p>
 
                 <div class="buttons">
@@ -666,9 +724,14 @@
 
             <div class="cards">
 
+
+                <!-- 3D TISK -->
+
                 <div class="card">
 
-                    <div class="icon">🖨️</div>
+                    <div class="icon">
+                        🖨️
+                    </div>
 
                     <h3>
                         3D tisk
@@ -682,9 +745,13 @@
                 </div>
 
 
+                <!-- BARVY -->
+
                 <div class="card">
 
-                    <div class="icon">🎨</div>
+                    <div class="icon">
+                        🎨
+                    </div>
 
                     <h3>
                         Dostupné barvy
@@ -695,56 +762,72 @@
                         barev PLA nebo PETG.
                     </p>
 
-                    <div class="colors-list">
 
-                        <div class="colors-title">
+                    <!-- PLA -->
+
+                    <div class="filament-section">
+
+                        <div class="filament-title">
                             PLA
                         </div>
 
-                        <div class="color-item">
-                            <span class="color-dot matte-black"></span>
-                            Matná černá
+                        <div class="color-list">
+
+                            <span class="color-tag">
+                                <span class="color-dot matte-black"></span>
+                                Matná černá
+                            </span>
+
+                            <span class="color-tag">
+                                <span class="color-dot black"></span>
+                                Černá
+                            </span>
+
+                            <span class="color-tag">
+                                <span class="color-dot white"></span>
+                                Bílá
+                            </span>
+
+                            <span class="color-tag">
+                                <span class="color-dot grey"></span>
+                                Šedá
+                            </span>
+
+                            <span class="color-tag">
+                                <span class="color-dot green"></span>
+                                Zelená
+                            </span>
+
+                            <span class="color-tag">
+                                <span class="color-dot orange"></span>
+                                Oranžová
+                            </span>
+
                         </div>
 
-                        <div class="color-item">
-                            <span class="color-dot black"></span>
-                            Černá
-                        </div>
+                    </div>
 
-                        <div class="color-item">
-                            <span class="color-dot white"></span>
-                            Bílá
-                        </div>
 
-                        <div class="color-item">
-                            <span class="color-dot gray"></span>
-                            Šedá
-                        </div>
+                    <!-- PETG -->
 
-                        <div class="color-item">
-                            <span class="color-dot green"></span>
-                            Zelená
-                        </div>
+                    <div class="filament-section">
 
-                        <div class="color-item">
-                            <span class="color-dot orange"></span>
-                            Oranžová
-                        </div>
-
-                        <br>
-
-                        <div class="colors-title">
+                        <div class="filament-title">
                             PETG
                         </div>
 
-                        <div class="color-item">
-                            <span class="color-dot black"></span>
-                            Černá
-                        </div>
+                        <div class="color-list">
 
-                        <div class="color-item">
-                            <span class="color-dot white"></span>
-                            Bílá
+                            <span class="color-tag">
+                                <span class="color-dot black"></span>
+                                Černá
+                            </span>
+
+                            <span class="color-tag">
+                                <span class="color-dot white"></span>
+                                Bílá
+                            </span>
+
                         </div>
 
                     </div>
@@ -752,9 +835,13 @@
                 </div>
 
 
+                <!-- RYCHLÁ DOMLUVA -->
+
                 <div class="card">
 
-                    <div class="icon">⚡</div>
+                    <div class="icon">
+                        ⚡
+                    </div>
 
                     <h3>
                         Rychlá domluva
@@ -767,6 +854,7 @@
                     </p>
 
                 </div>
+
 
             </div>
 
@@ -794,7 +882,9 @@
 
                 <div class="price-row">
 
-                    <span>PLA</span>
+                    <span>
+                        PLA
+                    </span>
 
                     <strong>
                         2,50 Kč / g
@@ -805,7 +895,9 @@
 
                 <div class="price-row">
 
-                    <span>PETG</span>
+                    <span>
+                        PETG
+                    </span>
 
                     <strong>
                         3 Kč / g
@@ -816,7 +908,9 @@
 
                 <div class="price-row">
 
-                    <span>Minimální cena</span>
+                    <span>
+                        Minimální cena
+                    </span>
 
                     <strong>
                         30 Kč
@@ -872,6 +966,7 @@
 
                 <div class="contact-buttons">
 
+
                     <!-- INSTAGRAM -->
 
                     <a
@@ -903,12 +998,15 @@
                         📞 704 281 231
                     </a>
 
+
                 </div>
 
 
                 <div class="contact-note">
 
-                    <strong>💡 Tip:</strong>
+                    <strong>
+                        💡 Tip:
+                    </strong>
 
                     <br>
 
@@ -945,6 +1043,7 @@
 
     </footer>
 
+
 </body>
+
 </html>
-```
