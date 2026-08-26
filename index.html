@@ -1,3 +1,6 @@
+
+
+  ```html
 <!DOCTYPE html>
 <html lang="cs">
 <head>
@@ -269,6 +272,71 @@
             color: #666;
 
             line-height: 1.6;
+        }
+
+        /* =========================
+           BARVY FILAMENTU
+        ========================== */
+
+        .colors-list {
+            margin-top: 20px;
+
+            color: #444;
+
+            line-height: 1.9;
+        }
+
+        .colors-title {
+            font-weight: bold;
+
+            color: #111;
+
+            margin-bottom: 5px;
+        }
+
+        .color-item {
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+        }
+
+        .color-dot {
+            width: 14px;
+            height: 14px;
+
+            border-radius: 50%;
+
+            display: inline-block;
+
+            border: 1px solid #bbb;
+
+            flex-shrink: 0;
+        }
+
+        .matte-black {
+            background: #111;
+        }
+
+        .black {
+            background: #000;
+        }
+
+        .white {
+            background: #fff;
+        }
+
+        .gray {
+            background: #888;
+        }
+
+        .green {
+            background: #168a35;
+        }
+
+        .orange {
+            background: #ff6b00;
         }
 
         /* =========================
@@ -619,13 +687,67 @@
                     <div class="icon">🎨</div>
 
                     <h3>
-                        Více barev
+                        Dostupné barvy
                     </h3>
 
                     <p>
                         Vyber si z dostupných
-                        barev filamentu.
+                        barev PLA nebo PETG.
                     </p>
+
+                    <div class="colors-list">
+
+                        <div class="colors-title">
+                            PLA
+                        </div>
+
+                        <div class="color-item">
+                            <span class="color-dot matte-black"></span>
+                            Matná černá
+                        </div>
+
+                        <div class="color-item">
+                            <span class="color-dot black"></span>
+                            Černá
+                        </div>
+
+                        <div class="color-item">
+                            <span class="color-dot white"></span>
+                            Bílá
+                        </div>
+
+                        <div class="color-item">
+                            <span class="color-dot gray"></span>
+                            Šedá
+                        </div>
+
+                        <div class="color-item">
+                            <span class="color-dot green"></span>
+                            Zelená
+                        </div>
+
+                        <div class="color-item">
+                            <span class="color-dot orange"></span>
+                            Oranžová
+                        </div>
+
+                        <br>
+
+                        <div class="colors-title">
+                            PETG
+                        </div>
+
+                        <div class="color-item">
+                            <span class="color-dot black"></span>
+                            Černá
+                        </div>
+
+                        <div class="color-item">
+                            <span class="color-dot white"></span>
+                            Bílá
+                        </div>
+
+                    </div>
 
                 </div>
 
@@ -825,3 +947,4 @@
 
 </body>
 </html>
+```
