@@ -1,1048 +1,1317 @@
 <!DOCTYPE html>
-
 <html lang="cs">
-
 <head>
-
-```
-<meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>3D PRINT</title>
-
-<style>
-
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
-    html {
-        scroll-behavior: smooth;
-    }
-
-    body {
-        font-family: Arial, sans-serif;
-        background: #f4f4f4;
-        color: #222;
-    }
-
-    /* =========================
-       NAVIGACE
-    ========================== */
-
-    header {
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-    }
-
-    .navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        padding: 20px 7%;
-
-        background: #090909;
-    }
-
-    .logo {
-        color: white;
-        text-decoration: none;
-
-        font-size: 25px;
-        font-weight: bold;
-        letter-spacing: 2px;
-    }
-
-    .logo span {
-        color: #ff8126;
-    }
-
-    .nav-links {
-        display: flex;
-        gap: 30px;
-    }
-
-    .nav-links a {
-        color: white;
-        text-decoration: none;
-
-        font-weight: bold;
-
-        transition: 0.3s;
-    }
-
-    .nav-links a:hover {
-        color: #ff8126;
-    }
-
-
-    /* =========================
-       ÚVOD
-    ========================== */
-
-    .hero {
-        min-height: 80vh;
-
-        display: flex;
-        align-items: center;
-
-        padding: 80px 7%;
-
-        background:
-            linear-gradient(
-                rgba(0,0,0,0.75),
-                rgba(0,0,0,0.75)
-            ),
-            url("hero.jpg");
-
-        background-size: cover;
-        background-position: center;
-
-        color: white;
-    }
-
-    .hero-content {
-        max-width: 700px;
-    }
-
-    .small-title {
-        color: #ff8126;
-        font-weight: bold;
-        letter-spacing: 3px;
-        margin-bottom: 20px;
-    }
-
-    .hero h1 {
-        font-size: 70px;
-        line-height: 1.05;
-        margin-bottom: 25px;
-    }
-
-    .hero h1 span {
-        color: #ff8126;
-        display: block;
-    }
-
-    .hero-text {
-        font-size: 20px;
-        line-height: 1.6;
-        color: #ddd;
-    }
-
-    .buttons {
-        display: flex;
-        gap: 15px;
-        margin-top: 35px;
-    }
-
-    .button {
-        padding: 15px 25px;
-        border-radius: 6px;
-
-        text-decoration: none;
-        font-weight: bold;
-
-        transition: 0.3s;
-    }
-
-    .primary {
-        background: #ff8126;
-        color: white;
-    }
-
-    .primary:hover {
-        transform: translateY(-3px);
-        background: #ff963f;
-    }
-
-    .secondary {
-        border: 2px solid white;
-        color: white;
-    }
-
-    .secondary:hover {
-        background: white;
-        color: #111;
-    }
-
-
-    /* =========================
-       SEKCE
-    ========================== */
-
-    .section {
-        padding: 100px 7%;
-    }
-
-    .dark-section {
-        background: #111;
-        color: white;
-    }
-
-    .section-title {
-        margin-bottom: 50px;
-    }
-
-    .section-title p {
-        color: #ff8126;
-        font-weight: bold;
-        letter-spacing: 3px;
-        margin-bottom: 10px;
-    }
-
-    .section-title h2 {
-        font-size: 45px;
-    }
-
-
-    /* =========================
-       KARTY
-    ========================== */
-
-    .cards {
-        display: grid;
-
-        grid-template-columns:
-            repeat(3, 1fr);
-
-        gap: 25px;
-    }
-
-    .card {
-        background: white;
-
-        padding: 35px;
-
-        border-radius: 12px;
-
-        box-shadow:
-            0 10px 30px
-            rgba(0,0,0,0.08);
-
-        transition: 0.3s;
-    }
-
-    .card:hover {
-        transform: translateY(-10px);
-    }
-
-    .icon {
-        font-size: 45px;
-        margin-bottom: 20px;
-    }
-
-    .card h3 {
-        font-size: 25px;
-        margin-bottom: 15px;
-    }
-
-    .card p {
-        color: #666;
-        line-height: 1.6;
-    }
-
-
-    /* =========================
-       GALERIE
-    ========================== */
-
-    #galerie {
-        background: #f4f4f4;
-    }
-
-    .gallery {
-        display: grid;
-
-        grid-template-columns:
-            repeat(4, 1fr);
-
-        gap: 20px;
-    }
-
-    .gallery-item {
-        position: relative;
-
-        height: 300px;
-
-        overflow: hidden;
-
-        border-radius: 15px;
-
-        background: #ddd;
-
-        box-shadow:
-            0 10px 25px
-            rgba(0,0,0,0.12);
-
-        transition: 0.3s;
-    }
-
-    .gallery-item:hover {
-        transform: translateY(-7px);
-    }
-
-    .gallery-item img {
-        width: 100%;
-        height: 100%;
-
-        object-fit: cover;
-
-        transition: 0.5s;
-    }
-
-    .gallery-item:hover img {
-        transform: scale(1.1);
-    }
-
-    .gallery-info {
-        position: absolute;
-
-        bottom: 0;
-        left: 0;
-        right: 0;
-
-        padding: 25px;
-
-        color: white;
-
-        background:
-            linear-gradient(
-                transparent,
-                rgba(0,0,0,0.9)
-            );
-    }
-
-    .gallery-info h3 {
-        font-size: 20px;
-    }
-
-
-    /* =========================
-       CENÍK
-    ========================== */
-
-    .price-box {
-        max-width: 800px;
-    }
-
-    .price-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        padding: 25px;
-
-        border-bottom: 1px solid #333;
-
-        font-size: 20px;
-    }
-
-    .price-row strong {
-        color: #ff8126;
-    }
-
-    .price-note {
-        margin-top: 25px;
-        color: #aaa;
-    }
-
-
-    /* =========================
-       KONTAKT
-    ========================== */
-
-    .contact-box {
-        max-width: 800px;
-
-        padding: 40px;
-
-        background: white;
-
-        border-radius: 12px;
-
-        box-shadow:
-            0 10px 30px
-            rgba(0,0,0,0.08);
-    }
-
-    .contact-text {
-        line-height: 1.7;
-        color: #555;
-    }
-
-    .contact-buttons {
-        display: flex;
-
-        gap: 15px;
-
-        margin-top: 30px;
-    }
-
-    .contact-button {
-        padding: 15px 20px;
-
-        border-radius: 6px;
-
-        color: white;
-
-        text-decoration: none;
-
-        font-weight: bold;
-
-        transition: 0.3s;
-    }
-
-    .instagram {
-        background: #111;
-    }
-
-    .instagram:hover {
-        background: #333;
-    }
-
-    .email {
-        background: #ff8126;
-    }
-
-    .email:hover {
-        background: #ff963f;
-    }
-
-    .phone {
-        background: #333;
-    }
-
-    .phone:hover {
-        background: #444;
-    }
-
-    .contact-note {
-        margin-top: 30px;
-
-        padding: 18px;
-
-        border-radius: 8px;
-
-        background: #f5f5f5;
-
-        color: #666;
-
-        line-height: 1.5;
-
-        font-size: 14px;
-    }
-
-
-    /* =========================
-       PATIČKA
-    ========================== */
-
-    footer {
-        background: #090909;
-
-        color: #aaa;
-
-        text-align: center;
-
-        padding: 50px 20px;
-    }
-
-    footer .logo {
-        margin-bottom: 10px;
-    }
-
-    .copyright {
-        margin-top: 20px;
-
-        font-size: 13px;
-
-        color: #666;
-    }
-
-
-    /* =========================
-       MOBIL
-    ========================== */
-
-    @media (max-width: 900px) {
-
-        .cards {
-            grid-template-columns: 1fr 1fr;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>3D PRINT | 3D tisk na zakázku</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .gallery {
-            grid-template-columns: 1fr 1fr;
+        html {
+            scroll-behavior: smooth;
         }
 
-        .hero h1 {
-            font-size: 55px;
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f5f5;
+            color: #111;
         }
-    }
 
+        /* =========================
+           NAVIGACE
+        ========================== */
 
-    @media (max-width: 750px) {
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
 
-        .nav-links {
-            display: none;
+            background: rgba(10, 10, 10, 0.96);
+            backdrop-filter: blur(10px);
         }
 
         .navbar {
-            justify-content: center;
+            max-width: 1200px;
+            height: 75px;
+
+            margin: auto;
+            padding: 0 25px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
+        .logo {
+            color: white;
+            text-decoration: none;
+
+            font-size: 24px;
+            font-weight: 800;
+        }
+
+        .logo span {
+            color: #ff6b00;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+
+            font-size: 15px;
+
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #ff6b00;
+        }
+
+        /* =========================
+           ÚVOD
+        ========================== */
+
         .hero {
-            text-align: center;
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+
+            padding: 120px 25px 80px;
+
+            background:
+                radial-gradient(
+                    circle at 80% 30%,
+                    #ff6b0030,
+                    transparent 35%
+                ),
+                #101010;
+
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 1100px;
+            width: 100%;
+
+            margin: auto;
+        }
+
+        .small-title {
+            color: #ff6b00;
+
+            font-weight: bold;
+            letter-spacing: 3px;
+
+            margin-bottom: 20px;
         }
 
         .hero h1 {
-            font-size: 45px;
+            font-size: clamp(45px, 8vw, 90px);
+
+            line-height: 0.95;
+
+            max-width: 850px;
+        }
+
+        .hero h1 span {
+            display: block;
+            color: #ff6b00;
         }
 
         .hero-text {
-            margin-left: auto;
-            margin-right: auto;
+            max-width: 650px;
+
+            margin-top: 30px;
+
+            color: #cfcfcf;
+
+            font-size: 18px;
+            line-height: 1.6;
         }
+
+        /* =========================
+           TLAČÍTKA
+        ========================== */
 
         .buttons {
-            justify-content: center;
+            margin-top: 35px;
+
+            display: flex;
+            gap: 15px;
+
+            flex-wrap: wrap;
         }
 
-        .cards {
-            grid-template-columns: 1fr;
+        .button {
+            display: inline-block;
+
+            padding: 15px 25px;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+            text-decoration: none;
+
+            font-size: 15px;
+
+            transition: 0.2s;
         }
 
-        .gallery {
-            grid-template-columns: 1fr;
+        .primary {
+            background: #ff6b00;
+            color: white;
+        }
+
+        .primary:hover {
+            background: #ff8126;
+            transform: translateY(-2px);
+        }
+
+        .secondary {
+            border: 1px solid #555;
+            color: white;
+        }
+
+        .secondary:hover {
+            border-color: #ff6b00;
+            transform: translateY(-2px);
+        }
+
+        /* =========================
+           SEKCE
+        ========================== */
+
+        .section {
+            max-width: 1100px;
+
+            margin: auto;
+
+            padding: 110px 25px;
+        }
+
+        .section-title {
+            margin-bottom: 50px;
+        }
+
+        .section-title p {
+            color: #ff6b00;
+
+            font-weight: bold;
+            letter-spacing: 3px;
+
+            margin-bottom: 10px;
         }
 
         .section-title h2 {
-            font-size: 35px;
+            font-size: 45px;
         }
 
-        .contact-box {
-            padding: 25px;
+        /* =========================
+           KARTY SLUŽEB
+        ========================== */
+
+        .cards {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
         }
 
-        .contact-buttons {
-            flex-direction: column;
+        .card {
+            background: white;
+
+            padding: 35px;
+
+            border-radius: 15px;
+
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.06);
+
+            transition: 0.2s;
         }
 
-        .contact-button {
-            text-align: center;
+        .card:hover {
+            transform: translateY(-5px);
+
+            box-shadow:
+                0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .icon {
+            font-size: 40px;
+
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 22px;
+
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #666;
+
+            line-height: 1.6;
+        }
+
+        /* =========================
+           CENÍK
+        ========================== */
+
+        .dark-section {
+            max-width: none;
+
+            background: #101010;
+
+            color: white;
+
+            padding-left:
+                max(25px, calc((100% - 1050px) / 2));
+
+            padding-right:
+                max(25px, calc((100% - 1050px) / 2));
+        }
+
+        .price-box {
+            max-width: 700px;
+
+            background: #181818;
+
+            border-radius: 15px;
+
+            overflow: hidden;
         }
 
         .price-row {
-            padding: 20px;
+            display: flex;
+
+            justify-content: space-between;
+
+            padding: 25px;
+
+            border-bottom: 1px solid #333;
         }
 
-    }
+        .price-row:last-child {
+            border-bottom: none;
+        }
 
-</style>
-```
+        .price-row strong {
+            color: #ff6b00;
+        }
 
+        .price-note {
+            max-width: 700px;
+
+            margin-top: 25px;
+
+            color: #999;
+
+            line-height: 1.6;
+        }
+
+        /* =========================
+           KONTAKT
+        ========================== */
+
+        .contact-box {
+            max-width: 750px;
+
+            background: white;
+
+            padding: 40px;
+
+            border-radius: 15px;
+
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.06);
+        }
+
+        .contact-text {
+            color: #666;
+
+            font-size: 17px;
+
+            line-height: 1.6;
+
+            margin-bottom: 30px;
+        }
+
+        .contact-buttons {
+            display: flex;
+
+            gap: 15px;
+
+            flex-wrap: wrap;
+        }
+
+        .contact-button {
+            display: inline-block;
+
+            padding: 14px 22px;
+
+            border-radius: 8px;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            color: white;
+
+            transition: 0.2s;
+        }
+
+        .contact-button:hover {
+            transform: translateY(-2px);
+        }
+
+        /* INSTAGRAM */
+
+        .instagram {
+            background: #111;
+        }
+
+        .instagram:hover {
+            background: #222;
+        }
+
+        /* E-MAIL */
+
+        .email {
+            background: #ff6b00;
+        }
+
+        .email:hover {
+            background: #ff8126;
+        }
+
+        /* TELEFON */
+
+        .phone {
+            background: #333;
+        }
+
+        .phone:hover {
+            background: #444;
+        }
+
+        /* POZNÁMKA */
+
+        .contact-note {
+            margin-top: 30px;
+
+            padding: 18px;
+
+            border-radius: 8px;
+
+            background: #f5f5f5;
+
+            color: #666;
+
+            line-height: 1.5;
+
+            font-size: 14px;
+        }
+
+        /* =========================
+           PATIČKA
+        ========================== */
+
+        footer {
+            background: #090909;
+
+            color: #aaa;
+
+            text-align: center;
+
+            padding: 50px 20px;
+        }
+
+        footer .logo {
+            margin-bottom: 10px;
+        }
+
+        .copyright {
+            margin-top: 20px;
+
+            font-size: 13px;
+
+            color: #666;
+        }
+
+        /* =========================
+           GALERIE / SLIDER
+        ========================== */
+
+        .gallery-section {
+            background: #0d0d0d;
+            color: white;
+            overflow: hidden;
+        }
+
+        .gallery-inner {
+            max-width: 1200px;
+        }
+
+        .gallery-section .section-title h2 {
+            color: white;
+        }
+
+        .section-subtitle {
+            display: block;
+            max-width: 650px;
+            margin-top: 15px;
+            color: #999;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .slider {
+            position: relative;
+            width: 100%;
+            max-width: 1050px;
+            height: min(62vw, 600px);
+            min-height: 350px;
+            margin: 0 auto;
+            border-radius: 22px;
+            overflow: hidden;
+            background: #151515;
+            box-shadow: 0 25px 70px rgba(0,0,0,.35);
+            border: 1px solid #2b2b2b;
+        }
+
+        .slides {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(1.04);
+            transition:
+                opacity .55s ease,
+                transform .7s ease,
+                visibility .55s;
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+        }
+
+        .slide::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(to top, rgba(0,0,0,.78), transparent 48%),
+                linear-gradient(to right, rgba(0,0,0,.15), transparent 55%);
+            pointer-events: none;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .slide-caption {
+            position: absolute;
+            left: 40px;
+            bottom: 35px;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .slide-caption strong {
+            font-size: clamp(22px, 3vw, 34px);
+        }
+
+        .slide-caption span {
+            color: #ddd;
+            font-size: 15px;
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 5;
+            width: 52px;
+            height: 52px;
+            border: 1px solid rgba(255,255,255,.25);
+            border-radius: 50%;
+            background: rgba(10,10,10,.65);
+            backdrop-filter: blur(10px);
+            color: white;
+            font-size: 27px;
+            line-height: 1;
+            cursor: pointer;
+            transition: .25s ease;
+        }
+
+        .slider-btn:hover {
+            background: #ff6b00;
+            border-color: #ff6b00;
+            transform: translateY(-50%) scale(1.08);
+        }
+
+        .slider-btn.prev {
+            left: 20px;
+        }
+
+        .slider-btn.next {
+            right: 20px;
+        }
+
+        /* =========================
+           NÁHLEDY GALERIE
+        ========================== */
+
+        .slider-thumbnails {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            margin-top: 18px;
+            overflow-x: auto;
+            padding: 4px 5px 8px;
+            scrollbar-width: thin;
+        }
+
+        .thumbnail {
+            flex: 0 0 90px;
+            width: 90px;
+            height: 65px;
+            padding: 0;
+            border: 2px solid transparent;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #181818;
+            cursor: pointer;
+            opacity: 0.55;
+            transition: 0.25s ease;
+        }
+
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .thumbnail:hover {
+            opacity: 1;
+            transform: translateY(-3px);
+        }
+
+        .thumbnail.active {
+            opacity: 1;
+            border-color: #ff6b00;
+            box-shadow:
+                0 0 0 2px rgba(255,107,0,.2),
+                0 5px 20px rgba(255,107,0,.2);
+        }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 9px;
+            margin-top: 22px;
+        }
+
+        .dot {
+            width: 9px;
+            height: 9px;
+            padding: 0;
+            border: 0;
+            border-radius: 50%;
+            background: #555;
+            cursor: pointer;
+            transition: .25s ease;
+        }
+
+        .dot.active {
+            width: 30px;
+            border-radius: 20px;
+            background: #ff6b00;
+        }
+
+        .dot:hover {
+            background: #ff8126;
+        }
+
+        /* jemné animace při načtení */
+
+        .hero-content,
+        .section-title,
+        .card,
+        .price-box,
+        .contact-box {
+            animation: fadeUp .7s ease both;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            .slide,
+            .hero-content,
+            .section-title,
+            .card,
+            .price-box,
+            .contact-box {
+                animation: none;
+                transition: none;
+            }
+        }
+
+
+        /* =========================
+           MOBIL
+        ========================== */
+
+        @media (max-width: 750px) {
+
+            .nav-links {
+                display: none;
+            }
+
+            .navbar {
+                justify-content: center;
+            }
+
+            .hero {
+                text-align: center;
+            }
+
+            .hero-text {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .buttons {
+                justify-content: center;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title h2 {
+                font-size: 35px;
+            }
+
+            .contact-box {
+                padding: 25px;
+            }
+
+            .contact-buttons {
+                flex-direction: column;
+            }
+
+            .contact-button {
+                text-align: center;
+            }
+
+            .price-row {
+                padding: 20px;
+            }
+
+            .slider {
+                height: 68vw;
+                min-height: 260px;
+                border-radius: 15px;
+            }
+
+            .slider-btn {
+                width: 42px;
+                height: 42px;
+                font-size: 22px;
+            }
+
+            .slider-btn.prev {
+                left: 10px;
+            }
+
+            .slider-btn.next {
+                right: 10px;
+            }
+
+            .slide-caption {
+                left: 20px;
+                bottom: 22px;
+            }
+
+            .slide-caption span {
+                font-size: 13px;
+            }
+
+            .slider-thumbnails {
+                justify-content: flex-start;
+                gap: 8px;
+            }
+
+            .thumbnail {
+                flex-basis: 72px;
+                width: 72px;
+                height: 52px;
+                border-radius: 8px;
+            }
+
+            .section-subtitle {
+                font-size: 14px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-```
-<!-- =========================
-     NAVIGACE
-========================== -->
+    <!-- =========================
+         NAVIGACE
+    ========================== -->
 
-<header>
+    <header>
+        <nav class="navbar">
 
-    <nav class="navbar">
+            <a href="#home" class="logo">
+                3D<span>PRINT</span>
+            </a>
 
-        <a href="#home" class="logo">
+            <div class="nav-links">
+
+                <a href="#home">Domů</a>
+                <a href="#sluzby">Služby</a>
+                <a href="#cenik">Ceník</a>
+                <a href="#galerie">Galerie</a>
+                <a href="#kontakt">Kontakt</a>
+
+            </div>
+
+        </nav>
+    </header>
+
+
+    <main>
+
+        <!-- =========================
+             ÚVOD
+        ========================== -->
+
+        <section id="home" class="hero">
+
+            <div class="hero-content">
+
+                <p class="small-title">
+                    3D TISK NA ZAKÁZKU
+                </p>
+
+                <h1>
+                    Máš model?
+                    <span>Já ho vytisknu.</span>
+                </h1>
+
+                <p class="hero-text">
+                    Potřebuješ vytisknout držák,
+                    dekoraci, součástku nebo vlastní model?
+                    <br>
+                    Napiš mi a domluvíme se.
+                </p>
+
+                <div class="buttons">
+
+                    <a href="#kontakt" class="button primary">
+                        Kontaktovat mě
+                    </a>
+
+                    <a href="#cenik" class="button secondary">
+                        Zobrazit ceník
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             SLUŽBY
+        ========================== -->
+
+        <section id="sluzby" class="section">
+
+            <div class="section-title">
+
+                <p>CO NABÍZÍM</p>
+
+                <h2>
+                    3D tisk jednoduše
+                </h2>
+
+            </div>
+
+
+            <div class="cards">
+
+                <div class="card">
+
+                    <div class="icon">🖨️</div>
+
+                    <h3>
+                        3D tisk
+                    </h3>
+
+                    <p>
+                        Vytisknu tvůj model
+                        na Bambu Lab P1S.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="icon">🎨</div>
+
+                    <h3>
+                        Více barev
+                    </h3>
+
+                    <p>
+                        Vyber si z dostupných
+                        barev filamentu.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="icon">⚡</div>
+
+                    <h3>
+                        Rychlá domluva
+                    </h3>
+
+                    <p>
+                        Napiš mi, co potřebuješ,
+                        a domluvíme se na ceně
+                        a termínu.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             GALERIE
+        ========================== -->
+
+        <section id="galerie" class="gallery-section">
+            <div class="section gallery-inner">
+                <div class="section-title">
+                    <p>MOJE PRÁCE</p>
+                    <h2>Galerie výtisků</h2>
+                    <span class="section-subtitle">
+                        Ukázky 3D modelů a výrobků, které jsem vytiskl.
+                    </span>
+                </div>
+
+                <div class="slider">
+                    <button class="slider-btn prev" aria-label="Předchozí obrázek">&#10094;</button>
+
+                    <div class="slides">
+                        <div class="slide active">
+                            <img src="tisk1.jpg" alt="Ukázka 3D tisku 1">
+                            <div class="slide-caption">
+                                <strong>3D tisk na zakázku</strong>
+                                <span>Ukázka hotového výtisku</span>
+                            </div>
+                        </div>
+
+                        <div class="slide">
+                            <img src="tisk2.jpg" alt="Ukázka 3D tisku 2">
+                            <div class="slide-caption">
+                                <strong>Detail výtisku</strong>
+                                <span>Přesný tisk z kvalitního filamentu</span>
+                            </div>
+                        </div>
+
+                        <div class="slide">
+                            <img src="tisk3.jpg" alt="Ukázka 3D tisku 3">
+                            <div class="slide-caption">
+                                <strong>Zakázkový model</strong>
+                                <span>Model podle požadavků zákazníka</span>
+                            </div>
+                        </div>
+
+                        <div class="slide">
+                            <img src="tisk4.jpg" alt="Ukázka 3D tisku 4">
+                            <div class="slide-caption">
+                                <strong>Další výtisk</strong>
+                                <span>PLA / PETG podle výběru</span>
+                            </div>
+                        </div>
+
+                        <div class="slide">
+                            <img src="tisk5.jpg" alt="Ukázka 3D tisku 5">
+                            <div class="slide-caption">
+                                <strong>3D model</strong>
+                                <span>Čisté provedení a kvalitní povrch</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="slider-btn next" aria-label="Další obrázek">&#10095;</button>
+                </div>
+
+                <div class="slider-thumbnails">
+
+                    <button class="thumbnail active" onclick="showSlide(0)" aria-label="Zobrazit obrázek 1">
+                        <img src="tisk1.jpg" alt="Náhled 1">
+                    </button>
+
+                    <button class="thumbnail" onclick="showSlide(1)" aria-label="Zobrazit obrázek 2">
+                        <img src="tisk2.jpg" alt="Náhled 2">
+                    </button>
+
+                    <button class="thumbnail" onclick="showSlide(2)" aria-label="Zobrazit obrázek 3">
+                        <img src="tisk3.jpg" alt="Náhled 3">
+                    </button>
+
+                    <button class="thumbnail" onclick="showSlide(3)" aria-label="Zobrazit obrázek 4">
+                        <img src="tisk4.jpg" alt="Náhled 4">
+                    </button>
+
+                    <button class="thumbnail" onclick="showSlide(4)" aria-label="Zobrazit obrázek 5">
+                        <img src="tisk5.jpg" alt="Náhled 5">
+                    </button>
+
+                </div>
+
+                <div class="slider-dots" aria-label="Výběr obrázku">
+                    <button class="dot active" aria-label="Obrázek 1"></button>
+                    <button class="dot" aria-label="Obrázek 2"></button>
+                    <button class="dot" aria-label="Obrázek 3"></button>
+                    <button class="dot" aria-label="Obrázek 4"></button>
+                    <button class="dot" aria-label="Obrázek 5"></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================
+             CENÍK
+        ========================== -->
+
+        <section id="cenik" class="section dark-section">
+
+            <div class="section-title">
+
+                <p>CENÍK</p>
+
+                <h2>
+                    Kolik tisk stojí?
+                </h2>
+
+            </div>
+
+
+            <div class="price-box">
+
+                <div class="price-row">
+
+                    <span>PLA</span>
+
+                    <strong>
+                        2,50 Kč / g
+                    </strong>
+
+                </div>
+
+
+                <div class="price-row">
+
+                    <span>PETG</span>
+
+                    <strong>
+                        3 Kč / g
+                    </strong>
+
+                </div>
+
+
+                <div class="price-row">
+
+                    <span>Minimální cena</span>
+
+                    <strong>
+                        30 Kč
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <p class="price-note">
+
+                Přesná cena závisí na velikosti modelu,
+                materiálu, době tisku a případných
+                podpěrách.
+
+            </p>
+
+        </section>
+
+
+        <!-- =========================
+             KONTAKT
+        ========================== -->
+
+        <section id="kontakt" class="section">
+
+            <div class="section-title">
+
+                <p>KONTAKT</p>
+
+                <h2>
+                    Chceš něco vytisknout?
+                </h2>
+
+            </div>
+
+
+            <div class="contact-box">
+
+                <p class="contact-text">
+
+                    Máš vlastní 3D model nebo potřebuješ
+                    něco vytisknout?
+
+                    <br><br>
+
+                    Napiš mi, pošli model a domluvíme se
+                    na ceně, barvě a termínu.
+
+                </p>
+
+
+                <div class="contact-buttons">
+
+                    <!-- INSTAGRAM -->
+
+                    <a
+                        href="https://www.instagram.com/adam.birner/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="contact-button instagram"
+                    >
+                        📷 Instagram
+                    </a>
+
+
+                    <!-- E-MAIL -->
+
+                    <a
+                        href="mailto:birneradam25@spseplzen.cz"
+                        class="contact-button email"
+                    >
+                        ✉️ E-mail
+                    </a>
+
+
+                    <!-- TELEFON -->
+
+                    <a
+                        href="tel:+420704281231"
+                        class="contact-button phone"
+                    >
+                        📞 704 281 231
+                    </a>
+
+                </div>
+
+
+                <div class="contact-note">
+
+                    <strong>💡 Tip:</strong>
+
+                    <br>
+
+                    Pokud máš 3D model,
+                    pošli mi například
+                    STL nebo 3MF soubor.
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         PATIČKA
+    ========================== -->
+
+    <footer>
+
+        <div class="logo">
             3D<span>PRINT</span>
-        </a>
-
-        <div class="nav-links">
-
-            <a href="#home">
-                Domů
-            </a>
-
-            <a href="#sluzby">
-                Služby
-            </a>
-
-            <a href="#galerie">
-                Galerie
-            </a>
-
-            <a href="#cenik">
-                Ceník
-            </a>
-
-            <a href="#kontakt">
-                Kontakt
-            </a>
-
         </div>
 
-    </nav>
-
-</header>
-
-
-
-<main>
-
-
-    <!-- =========================
-         ÚVOD
-    ========================== -->
-
-    <section id="home" class="hero">
-
-        <div class="hero-content">
-
-            <p class="small-title">
-                3D TISK NA ZAKÁZKU
-            </p>
-
-            <h1>
-
-                Máš model?
-
-                <span>
-                    Já ho vytisknu.
-                </span>
-
-            </h1>
-
-            <p class="hero-text">
-
-                Potřebuješ vytisknout držák,
-                dekoraci, součástku nebo vlastní model?
-
-                <br>
-
-                Napiš mi a domluvíme se.
-
-            </p>
-
-            <div class="buttons">
-
-                <a href="#kontakt"
-                   class="button primary">
-
-                    Kontaktovat mě
-
-                </a>
-
-                <a href="#galerie"
-                   class="button secondary">
-
-                    Prohlédnout tisky
-
-                </a>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =========================
-         SLUŽBY
-    ========================== -->
-
-    <section id="sluzby" class="section">
-
-        <div class="section-title">
-
-            <p>
-                CO NABÍZÍM
-            </p>
-
-            <h2>
-                3D tisk jednoduše
-            </h2>
-
-        </div>
-
-
-        <div class="cards">
-
-
-            <div class="card">
-
-                <div class="icon">
-                    🖨️
-                </div>
-
-                <h3>
-                    3D tisk
-                </h3>
-
-                <p>
-
-                    Vytisknu tvůj model
-                    na Bambu Lab P1S.
-
-                </p>
-
-            </div>
-
-
-
-            <div class="card">
-
-                <div class="icon">
-                    🎨
-                </div>
-
-                <h3>
-                    Více barev
-                </h3>
-
-                <p>
-
-                    Vyber si z dostupných
-                    barev PLA nebo PETG.
-
-                </p>
-
-            </div>
-
-
-
-            <div class="card">
-
-                <div class="icon">
-                    ⚡
-                </div>
-
-                <h3>
-                    Rychlá domluva
-                </h3>
-
-                <p>
-
-                    Napiš mi, co potřebuješ,
-                    a domluvíme se na ceně
-                    a termínu.
-
-                </p>
-
-            </div>
-
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =========================
-         GALERIE
-    ========================== -->
-
-    <section id="galerie" class="section">
-
-        <div class="section-title">
-
-            <p>
-                MOJE PRÁCE
-            </p>
-
-            <h2>
-                Galerie 3D tisků
-            </h2>
-
-        </div>
-
-
-        <div class="gallery">
-
-
-            <div class="gallery-item">
-
-                <img src="tisk1.jpg"
-                     alt="3D tisk 1">
-
-                <div class="gallery-info">
-
-                    <h3>
-                        3D tisk #1
-                    </h3>
-
-                </div>
-
-            </div>
-
-
-
-            <div class="gallery-item">
-
-                <img src="tisk2.jpg"
-                     alt="3D tisk 2">
-
-                <div class="gallery-info">
-
-                    <h3>
-                        3D tisk #2
-                    </h3>
-
-                </div>
-
-            </div>
-
-
-
-            <div class="gallery-item">
-
-                <img src="tisk3.jpg"
-                     alt="3D tisk 3">
-
-                <div class="gallery-info">
-
-                    <h3>
-                        3D tisk #3
-                    </h3>
-
-                </div>
-
-            </div>
-
-
-
-            <div class="gallery-item">
-
-                <img src="tisk4.jpg"
-                     alt="3D tisk 4">
-
-                <div class="gallery-info">
-
-                    <h3>
-                        3D tisk #4
-                    </h3>
-
-                </div>
-
-            </div>
-
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =========================
-         CENÍK
-    ========================== -->
-
-    <section id="cenik"
-             class="section dark-section">
-
-        <div class="section-title">
-
-            <p>
-                CENÍK
-            </p>
-
-            <h2>
-                Kolik tisk stojí?
-            </h2>
-
-        </div>
-
-
-        <div class="price-box">
-
-
-            <div class="price-row">
-
-                <span>
-                    PLA
-                </span>
-
-                <strong>
-                    2,50 Kč / g
-                </strong>
-
-            </div>
-
-
-
-            <div class="price-row">
-
-                <span>
-                    PETG
-                </span>
-
-                <strong>
-                    3 Kč / g
-                </strong>
-
-            </div>
-
-
-
-            <div class="price-row">
-
-                <span>
-                    Minimální cena
-                </span>
-
-                <strong>
-                    30 Kč
-                </strong>
-
-            </div>
-
-
-        </div>
-
-
-        <p class="price-note">
-
-            Přesná cena závisí na velikosti modelu,
-            materiálu, době tisku a případných
-            podpěrách.
-
+        <p>
+            3D tisk na zakázku
         </p>
 
-    </section>
+        <p class="copyright">
+            © 2026 3D PRINT
+        </p>
+
+    </footer>
 
 
+    <script>
+        const slides = document.querySelectorAll(".slide");
+        const dots = document.querySelectorAll(".dot");
+        const prevBtn = document.querySelector(".slider-btn.prev");
+        const nextBtn = document.querySelector(".slider-btn.next");
+        const slider = document.querySelector(".slider");
 
-    <!-- =========================
-         KONTAKT
-    ========================== -->
+        let currentSlide = 0;
+        let autoPlay;
 
-    <section id="kontakt"
-             class="section">
+        function showSlide(index) {
+            currentSlide = (index + slides.length) % slides.length;
 
-        <div class="section-title">
+            slides.forEach((slide, i) => {
+                slide.classList.toggle("active", i === currentSlide);
+            });
 
-            <p>
-                KONTAKT
-            </p>
+            dots.forEach((dot, i) => {
+                dot.classList.toggle("active", i === currentSlide);
+            });
+        }
 
-            <h2>
-                Chceš něco vytisknout?
-            </h2>
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
 
-        </div>
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
 
+        function startAutoPlay() {
+            clearInterval(autoPlay);
+            autoPlay = setInterval(nextSlide, 4500);
+        }
 
-        <div class="contact-box">
+        nextBtn.addEventListener("click", () => {
+            nextSlide();
+            startAutoPlay();
+        });
 
+        prevBtn.addEventListener("click", () => {
+            prevSlide();
+            startAutoPlay();
+        });
 
-            <p class="contact-text">
+        dots.forEach((dot, index) => {
+            dot.addEventListener("click", () => {
+                showSlide(index);
+                startAutoPlay();
+            });
+        });
 
-                Máš vlastní 3D model nebo potřebuješ
-                něco vytisknout?
+        // Pozastavení automatického posouvání při najetí myší
+        slider.addEventListener("mouseenter", () => clearInterval(autoPlay));
+        slider.addEventListener("mouseleave", startAutoPlay);
 
-                <br><br>
+        // Ovládání šipkami na klávesnici
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "ArrowRight") {
+                nextSlide();
+                startAutoPlay();
+            }
 
-                Chceš vytisknout něco z mojí galerie?
-                Není problém – stačí mi napsat,
-                který model se ti líbí.
+            if (event.key === "ArrowLeft") {
+                prevSlide();
+                startAutoPlay();
+            }
+        });
 
-                <br><br>
+        // Swipe na mobilu
+        let touchStartX = 0;
 
-                Napiš mi, pošli model nebo vyber tisk
-                z galerie a domluvíme se na ceně,
-                barvě a termínu.
+        slider.addEventListener("touchstart", (event) => {
+            touchStartX = event.changedTouches[0].screenX;
+            clearInterval(autoPlay);
+        }, { passive: true });
 
-            </p>
+        slider.addEventListener("touchend", (event) => {
+            const touchEndX = event.changedTouches[0].screenX;
+            const difference = touchStartX - touchEndX;
 
+            if (Math.abs(difference) > 50) {
+                if (difference > 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+            }
 
+            startAutoPlay();
+        }, { passive: true });
 
-            <div class="contact-buttons">
-
-
-                <a href="https://www.instagram.com/adam.birner/"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   class="contact-button instagram">
-
-                    📷 Instagram
-
-                </a>
-
-
-
-                <a href="mailto:birneradam25@spseplzen.cz"
-                   class="contact-button email">
-
-                    ✉️ E-mail
-
-                </a>
-
-
-
-                <a href="tel:+420704281231"
-                   class="contact-button phone">
-
-                    📞 704 281 231
-
-                </a>
-
-
-            </div>
-
-
-
-            <div class="contact-note">
-
-                <strong>
-                    💡 Tip:
-                </strong>
-
-                <br>
-
-                Pokud máš 3D model,
-                pošli mi například
-                STL nebo 3MF soubor.
-
-            </div>
-
-
-        </div>
-
-    </section>
-
-
-</main>
-
-
-
-<!-- =========================
-     PATIČKA
-========================== -->
-
-<footer>
-
-    <div class="logo">
-        3D<span>PRINT</span>
-    </div>
-
-    <p>
-        3D tisk na zakázku
-    </p>
-
-    <p class="copyright">
-        © 2026 3D PRINT
-    </p>
-
-</footer>
-```
+        showSlide(0);
+        startAutoPlay();
+    </script>
 
 </body>
-
 </html>
 
 
