@@ -4,25 +4,511 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D PRINT | 3D tisk na zakázku</title>
 
-<title>3D PRINT | 3D tisk na zakázku</title>
-
+```
 <style>
     * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-    }
-
-    html {
         scroll-behavior: smooth;
     }
 
     body {
         font-family: Arial, Helvetica, sans-serif;
-        background: #f5f5f5;
-        color: #111;
+        background: #0b0b0b;
+        color: white;
+        line-height: 1.6;
     }
 
-    /* =========================
+    /* ===== MENU ===== */
+
+    header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: rgba(11, 11, 11, 0.96);
+        border-bottom: 1px solid #222;
+        backdrop-filter: blur(10px);
+    }
+
+    nav {
+        max-width: 1200px;
+        margin: auto;
+        height: 75px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 25px;
+    }
+
+    .logo {
+        color: #ff6b00;
+        font-size: 24px;
+        font-weight: 800;
+        text-decoration: none;
+        letter-spacing: 1px;
+    }
+
+    .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 30px;
+    }
+
+    .nav-links a {
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 600;
+        transition: 0.25s;
+    }
+
+    .nav-links a:hover {
+        color: #ff6b00;
+    }
+
+    /* ===== HLAVNÍ SEKCE ===== */
+
+    section {
+        max-width: 1200px;
+        margin: auto;
+        padding: 90px 25px;
+    }
+
+    #domu {
+        min-height: calc(100vh - 75px);
+        display: flex;
+        align-items: center;
+    }
+
+    .hero {
+        width: 100%;
+        text-align: center;
+    }
+
+    .hero h1 {
+        font-size: clamp(45px, 8vw, 85px);
+        line-height: 1;
+        margin-bottom: 25px;
+        font-weight: 900;
+    }
+
+    .hero h1 span {
+        color: #ff6b00;
+    }
+
+    .hero p {
+        max-width: 700px;
+        margin: 0 auto 35px;
+        color: #bdbdbd;
+        font-size: 20px;
+    }
+
+    .button {
+        display: inline-block;
+        background: #ff6b00;
+        color: white;
+        text-decoration: none;
+        padding: 14px 28px;
+        border-radius: 8px;
+        font-weight: 700;
+        transition: 0.25s;
+    }
+
+    .button:hover {
+        background: #ff8126;
+        transform: translateY(-2px);
+    }
+
+    /* ===== NADPISY ===== */
+
+    .section-title {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .section-title h2 {
+        font-size: 42px;
+        margin-bottom: 10px;
+    }
+
+    .section-title h2 span {
+        color: #ff6b00;
+    }
+
+    .section-title p {
+        color: #999;
+    }
+
+    /* ===== SLUŽBY ===== */
+
+    .cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 25px;
+    }
+
+    .card {
+        background: #141414;
+        border: 1px solid #252525;
+        border-radius: 14px;
+        padding: 30px;
+        transition: 0.25s;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        border-color: #ff6b00;
+    }
+
+    .card-icon {
+        width: 55px;
+        height: 55px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #ff6b00;
+        border-radius: 12px;
+        font-size: 25px;
+        margin-bottom: 20px;
+    }
+
+    .card h3 {
+        font-size: 22px;
+        margin-bottom: 12px;
+    }
+
+    .card p {
+        color: #a8a8a8;
+    }
+
+    /* ===== CENÍK ===== */
+
+    .price-box {
+        max-width: 800px;
+        margin: auto;
+        background: #141414;
+        border: 1px solid #252525;
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+    .price-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 22px 28px;
+        border-bottom: 1px solid #292929;
+    }
+
+    .price-row:last-child {
+        border-bottom: none;
+    }
+
+    .price-row span:first-child {
+        color: #ddd;
+    }
+
+    .price {
+        color: #ff6b00;
+        font-weight: 800;
+    }
+
+    .price-note {
+        text-align: center;
+        margin-top: 25px;
+        color: #888;
+        font-size: 14px;
+    }
+
+    /* ===== KONTAKT ===== */
+
+    .contact-box {
+        max-width: 750px;
+        margin: auto;
+        text-align: center;
+        background: #141414;
+        border: 1px solid #252525;
+        border-radius: 15px;
+        padding: 45px 30px;
+    }
+
+    .contact-box h3 {
+        font-size: 30px;
+        margin-bottom: 15px;
+    }
+
+    .contact-box p {
+        color: #aaa;
+        margin-bottom: 25px;
+    }
+
+    .contact-email {
+        display: inline-block;
+        color: #ff6b00;
+        text-decoration: none;
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 25px;
+    }
+
+    .contact-email:hover {
+        text-decoration: underline;
+    }
+
+    /* ===== PATIČKA ===== */
+
+    footer {
+        border-top: 1px solid #222;
+        text-align: center;
+        padding: 30px 20px;
+        color: #777;
+        font-size: 14px;
+    }
+
+    footer span {
+        color: #ff6b00;
+    }
+
+    /* ===== MOBIL ===== */
+
+    @media (max-width: 800px) {
+        nav {
+            height: auto;
+            padding: 20px;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .nav-links {
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        #domu {
+            min-height: auto;
+            padding-top: 100px;
+        }
+
+        .cards {
+            grid-template-columns: 1fr;
+        }
+
+        .hero h1 {
+            font-size: 50px;
+        }
+
+        .hero p {
+            font-size: 17px;
+        }
+
+        .section-title h2 {
+            font-size: 34px;
+        }
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+```
+<!-- ===== MENU ===== -->
+
+<header>
+    <nav>
+        <a href="#domu" class="logo">3D PRINT</a>
+
+        <ul class="nav-links">
+            <li><a href="#domu">Domů</a></li>
+            <li><a href="#sluzby">Služby</a></li>
+            <li><a href="#cenik">Ceník</a></li>
+            <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+    </nav>
+</header>
+
+
+<!-- ===== DOMŮ ===== -->
+
+<section id="domu">
+    <div class="hero">
+        <h1>Máš model?<br><span>Já ho vytisknu.</span></h1>
+
+        <p>
+            3D tisk na zakázku. Pošli svůj model a já se postarám
+            o jeho kvalitní vytištění.
+        </p>
+
+        <a href="#kontakt" class="button">Objednat tisk</a>
+    </div>
+</section>
+
+
+<!-- ===== SLUŽBY ===== -->
+
+<section id="sluzby">
+
+    <div class="section-title">
+        <h2>Naše <span>služby</span></h2>
+        <p>3D tisk podle vašich představ</p>
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <div class="card-icon">🖨️</div>
+            <h3>3D tisk na zakázku</h3>
+            <p>
+                Máte vlastní 3D model? Vytisknu ho přesně podle
+                vašich požadavků.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">⚙️</div>
+            <h3>Výběr materiálu</h3>
+            <p>
+                Používáme kvalitní filamenty a podle použití
+                vybereme vhodný materiál.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">📦</div>
+            <h3>Hotový výrobek</h3>
+            <p>
+                Výsledný výrobek připravíme k osobnímu předání
+                nebo odeslání.
+            </p>
+        </div>
+
+    </div>
+
+    <div class="cards" style="margin-top: 25px;">
+
+        <div class="card">
+            <div class="card-icon">💡</div>
+            <h3>Nemáš model?</h3>
+            <p>
+                Nevadí. Napiš nám, co potřebuješ, a můžeme
+                společně vymyslet řešení.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🎨</div>
+            <h3>Více barev</h3>
+            <p>
+                Díky vícebarevnému tisku můžeme vytvořit
+                zajímavé a výrazné výrobky.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🏭</div>
+            <h3>Bambu Lab P1S</h3>
+            <p>
+                Tiskneme na moderní tiskárně Bambu Lab P1S
+                pro rychlý a kvalitní výsledek.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ===== CENÍK ===== -->
+
+<section id="cenik">
+
+    <div class="section-title">
+        <h2><span>Ceník</span></h2>
+        <p>Cena závisí na konkrétním modelu a materiálu.</p>
+    </div>
+
+    <div class="price-box">
+
+        <div class="price-row">
+            <span>Malý jednoduchý tisk</span>
+            <span class="price">od 50 Kč</span>
+        </div>
+
+        <div class="price-row">
+            <span>Střední tisk</span>
+            <span class="price">od 100 Kč</span>
+        </div>
+
+        <div class="price-row">
+            <span>Větší / složitější tisk</span>
+            <span class="price">dle dohody</span>
+        </div>
+
+        <div class="price-row">
+            <span>Vícebarevný tisk</span>
+            <span class="price">dle modelu</span>
+        </div>
+
+        <div class="price-row">
+            <span>Zakázkový výrobek</span>
+            <span class="price">dle dohody</span>
+        </div>
+
+    </div>
+
+    <p class="price-note">
+        Přesnou cenu vám sdělím po zaslání 3D modelu.
+    </p>
+
+</section>
+
+
+<!-- ===== KONTAKT ===== -->
+
+<section id="kontakt">
+
+    <div class="section-title">
+        <h2><span>Kontakt</span></h2>
+        <p>Chceš něco vytisknout? Ozvi se.</p>
+    </div>
+
+    <div class="contact-box">
+
+        <h3>Máš vlastní model?</h3>
+
+        <p>
+            Pošli mi model nebo napiš, co potřebuješ vytisknout.
+            Domluvíme se na ceně, materiálu i barvě.
+        </p>
+
+        <a href="mailto:tvuj@email.cz" class="contact-email">
+            tvuj@email.cz
+        </a>
+
+        <br>
+
+        <a href="mailto:tvuj@email.cz" class="button">
+            Napsat e-mail
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- ===== PATIČKA ===== -->
+
+<footer>
+    © 2026 <span>3D PRINT</span> | 3D tisk na zakázku
+</footer>
+```
+
+</body>
+</html>
+
 
